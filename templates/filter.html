@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+{% block content %}
+<html lang="">
+
+<body id="top">
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <article>
+
+      <h3 class="heading">QUALITY FOOD ITEMS</h3>
+      <p>Register with us now and have quality food items at your door step</p>
+
+    </article>
+    <!-- ################################################################################################ -->
+  </div>
+
+
+  <div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+
+    <section id="introblocks">
+      <ul class="nospace group">
+        {% for i in pr %}
+<!--        pg.object_list-->
+        <li class="one_third">
+          <figure><a class="imgover" href={{i.get__url}}><img src="{{i.img.url}}" alt="" style="height:200px; width:300px"></a>
+            <figcaption>
+              <h6 class="heading">{{i.name}}</h6>
+              <p>{{i.des|truncatewords:10}}</p>
+              <p>{{i.price}}/-</p>
+            </figcaption>
+          </figure>
+        </li>
+       {% endfor %}
+      </ul>
+    </section>
+<br>
+    <br>
+<!--<center>-->
+<!--  {% for p in pg.paginator.page_range %}-->
+<!--  <a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p %}active{% endif %}">{{p}}</a>-->
+<!--  {% endfor %}-->
+<!--</center>-->
+    <nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="/" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item disabled"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="/">Next</a>
+    </li>
+  </ul>
+</nav>
+  </main>
+ </div>
+
+<script src="{% static 'hm/layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.mobilemenu.js' %}"></script>
+
+</body>
+</html>
+{% endblock %}

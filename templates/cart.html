@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="CodeHim">
+    <title>Shopme...!</title>
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{% static 'cr/css/style.css' %}">
+	<!-- Demo CSS (No need to include it into your project) -->
+	<link rel="stylesheet" href="{% static 'cr/css/demo.css' %}">
+
+  </head>
+  <body>
+ <header class="intro">
+ <h1>My cart </h1>
+ <p>Your shopping cart.</p>
+
+ <div class="action">
+ <a href="/" title="Back to download and tutorial page" class="btn back">Back to Home</a>
+ </div>
+ </header>
+
+
+ <main>
+     <!-- Start DEMO HTML (Use the following code into your project)-->
+ <div class="container">
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cartModal">
+    View Cart
+  </button>
+</div>
+
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Your Shopping Cart
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-image">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for i in ci %}
+            <tr>
+              <td class="w-25">
+                <a href="{{i.product.get__url}}" > <img src="{{i.product.img.url}}" class="img-fluid img-thumbnail" alt="Sheep"></a>
+              </td>
+              <td><a href="{{i.product.get__url}}"> {{i.product.name}}</a></td>
+              <td>{{i.product.price}}x1</td>
+              <td><a href="{% url 'decrement' i.product.id %}"><i class="fa fa-angle-double-left" style="font-size:18px;color:dodgerblue"></i></a>    {{i.quantity}}    <a href="{% url 'add_cart' i.product.id %}"><i class="fa fa-angle-double-right" style="font-size:18px;color:dodgerblue"></i></a> </td>
+              <td>{{i.total}}</td>
+              <td>
+                <a href="{% url 'delete' i.product.id %}" class="btn btn-success btn-sm">
+                  <i class="fa fa-trash-o" style="font-size:20px;color:red"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+        <div class="d-flex justify-content-end">
+          <h5>Total: <span class="price text-success">{{t}}/-</span></h5>
+        </div>
+      </div>
+
+      <div class="modal-footer border-top-0 d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+
+     <!-- END EDMO HTML (Happy Coding!)-->
+ </main>
+<script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
+<script  src="{% static 'cr/./js/script.js' %}"></script>
+
+  </body>
+</html>
+{% endblock %}
